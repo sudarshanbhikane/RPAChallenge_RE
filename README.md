@@ -1,7 +1,3 @@
-Certainly! Below is a template for a README document that you can use for your GitHub repository. Feel free to customize it based on your specific project details.
-
----
-
 # UiPath Form Submission Automation
 
 ## Overview
