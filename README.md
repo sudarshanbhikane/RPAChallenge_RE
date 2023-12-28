@@ -1,39 +1,63 @@
-### Documentation is included in the Documentation folder ###
+Certainly! Below is a template for a README document that you can use for your GitHub repository. Feel free to customize it based on your specific project details.
 
+---
 
-### REFrameWork Template ###
-**Robotic Enterprise Framework**
+# UiPath Form Submission Automation
 
-* Built on top of *Transactional Business Process* template
-* Uses *State Machine* layout for the phases of automation project
-* Offers high level logging, exception handling and recovery
-* Keeps external settings in *Config.xlsx* file and Orchestrator assets
-* Pulls credentials from Orchestrator assets and *Windows Credential Manager*
-* Gets transaction data from Orchestrator queue and updates back status
-* Takes screenshots in case of system exceptions
+## Overview
 
+This UiPath project automates the submission of form data from a spreadsheet into a dynamic web form. The challenge involves handling changing positions of form fields after each submission over 10 rounds. The project is built using UiPath ReFramework and integrates with UiPath Orchestrator Queue for efficient transaction processing.
 
-### How It Works ###
+## Features
 
-1. **INITIALIZE PROCESS**
- + ./Framework/*InitiAllSettings* - Load configuration data from Config.xlsx file and from assets
- + ./Framework/*GetAppCredential* - Retrieve credentials from Orchestrator assets or local Windows Credential Manager
- + ./Framework/*InitiAllApplications* - Open and login to applications used throughout the process
+- Spreadsheet data extraction and processing.
+- Dynamic identification of form fields using reliable selectors.
+- Integration with UiPath Orchestrator Queue for transaction management.
+- Retry mechanism for handling transient errors during form submission.
+- Countdown and submission limit adherence.
+- Comprehensive logging and exception handling.
 
-2. **GET TRANSACTION DATA**
- + ./Framework/*GetTransactionData* - Fetches transactions from an Orchestrator queue defined by Config("OrchestratorQueueName") or any other configured data source
+## Project Structure
 
-3. **PROCESS TRANSACTION**
- + *Process* - Process trasaction and invoke other workflows related to the process being automated 
- + ./Framework/*SetTransactionStatus* - Updates the status of the processed transaction (Orchestrator transactions by default): Success, Business Rule Exception or System Exception
+- **Main.xaml:** Orchestrates the entire automation process using the ReFramework.
+- **Process.xaml:** Contains the logic for reading spreadsheet data, dynamic form filling, and submission.
+- **Config.xlsx:** Configuration file for application settings.
+- **Project Dependencies:** Orchestrator activities, Excel activities, and other relevant packages.
 
-4. **END PROCESS**
- + ./Framework/*CloseAllApplications* - Logs out and closes applications used throughout the process
+## Setup
 
+1. Clone the repository:
 
-### For New Project ###
+    ```bash
+    git clone https://github.com/yourusername/uipath-form-automation.git
+    ```
 
-1. Check the Config.xlsx file and add/customize any required fields and values
-2. Implement InitiAllApplications.xaml and CloseAllApplicatoins.xaml workflows, linking them in the Config.xlsx fields
-3. Implement GetTransactionData.xaml and SetTransactionStatus.xaml according to the transaction type being used (Orchestrator queues by default)
-4. Implement Process.xaml workflow and invoke other workflows related to the process being automated
+2. Open the project in UiPath Studio.
+
+3. Update the Config.xlsx file with the necessary settings.
+
+4. Configure Orchestrator connection details in the Config.xlsx file.
+
+5. Run the Main.xaml file to start the automation.
+
+## Configuration
+
+- **Config.xlsx:** Modify this file to update application settings, Orchestrator details, and other configurations.
+
+## Orchestrator Queue Integration
+
+1. Create a new queue in UiPath Orchestrator named `FormSubmissionQueue`.
+2. Enqueue the necessary data (spreadsheet rows) into the `FormSubmissionQueue` for processing.
+
+## Customization
+
+- **Dynamic Field Identification:** Customize the selectors and logic in `Process.xaml` to adapt to the changing positions of form fields.
+
+## Testing
+
+Thoroughly test the automation with different scenarios, considering changing form field positions and other edge cases.
+
+## Known Issues
+
+- No known issues at the moment.
+
